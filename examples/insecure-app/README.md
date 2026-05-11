@@ -18,7 +18,7 @@ usage in client code (`src/hooks/useChat.ts`) and server-side `process.env` read
 
 It contains:
 
-- **`.env.example`** — variable names only; copy to `.env` and add keys locally.
+- **`.env.example`** — comments only (no `KEY=value` lines); copy to `.env` and add keys locally.
 - A React hook (`src/hooks/useChat.ts`) that reads `import.meta.env.VITE_OPENAI_API_KEY`
   in the browser. Guardian flags this as **CRITICAL** when a value is present because
   the secret is bundled into the client.

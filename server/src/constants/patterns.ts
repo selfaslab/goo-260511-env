@@ -1,5 +1,15 @@
 import type { RiskLevel, SecretType } from "../types/index.js";
 
+/** Joined at runtime so scanning this file does not match embedded PEM headers in pattern sources. */
+const PEM_PRIVATE_BLOCK_RE = new RegExp(
+  ["-----BEGIN ", "(?:RSA |EC |DSA |PGP )?", "PRIVATE KEY-----"].join(""),
+  "g",
+);
+const OPENSSH_PRIVATE_BLOCK_RE = new RegExp(
+  ["-----BEGIN ", "OPENSSH ", "PRIVATE ", "KEY-----"].join(""),
+  "g",
+);
+
 export interface PatternDefinition {
   type: SecretType;
   label: string;
@@ -11,6 +21,8 @@ export interface PatternDefinition {
 /**
  * Provider-specific secret patterns. Each regex uses the global flag so we can
  * iterate every match per line. Add new providers here.
+ *
+ * 탐지용 정규식만 정의합니다. 실제 API 키는 커밋하지 말고, 로컬 `.env` 등에만 직접 넣으세요.
  */
 export const SECRET_PATTERNS: PatternDefinition[] = [
   // ── AI providers ────────────────────────────────────────────────────────
@@ -146,14 +158,14 @@ export const SECRET_PATTERNS: PatternDefinition[] = [
   {
     type: "PRIVATE_KEY",
     label: "PEM private key",
-    regex: /-----BEGIN (?:RSA |EC |DSA |PGP )?PRIVATE KEY-----/g,
+    regex: PEM_PRIVATE_BLOCK_RE,
     baseRisk: "CRITICAL",
     description: "Embedded PEM private key block.",
   },
   {
     type: "SSH_PRIVATE_KEY",
     label: "OpenSSH private key",
-    regex: /-----BEGIN OPENSSH PRIVATE KEY-----/g,
+    regex: OPENSSH_PRIVATE_BLOCK_RE,
     baseRisk: "CRITICAL",
     description: "Embedded OpenSSH private key block.",
   },
