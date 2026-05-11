@@ -1,14 +1,18 @@
 /**
- * INTENTIONALLY INSECURE EXAMPLE.
+ * INTENTIONALLY INSECURE EXAMPLE (demo only).
  *
- * Demonstrates a hardcoded GitHub PAT inside source. Guardian flags this as
- * CRITICAL because the secret would be committed to git history forever.
+ * Reads a GitHub token from `import.meta.env.VITE_GITHUB_PAT`, so anything you
+ * put in `.env` is bundled to the browser — Guardian flags this as CRITICAL.
+ *
+ * Do not commit `.env`. Copy `.env.example` → `.env` and paste a disposable PAT
+ * only on your machine. Upstream repo (no keys):
+ * https://github.com/selfaslab/goo-260511-env
  */
-const HARDCODED_TOKEN = "ghp_abcdEFGH1234567890abcdEFGH1234567890";
+const TOKEN = import.meta.env.VITE_GITHUB_PAT ?? "";
 
 export async function listRepos(user: string): Promise<unknown> {
   const res = await fetch(`https://api.github.com/users/${user}/repos`, {
-    headers: { Authorization: `token ${HARDCODED_TOKEN}` },
+    headers: { Authorization: `token ${TOKEN}` },
   });
   return res.json();
 }

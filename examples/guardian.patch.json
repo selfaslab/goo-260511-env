@@ -14,7 +14,7 @@
     },
     {
       "file": "src/services/github.ts",
-      "find": "const HARDCODED_TOKEN = \"ghp_abcdEFGH1234567890abcdEFGH1234567890\";\n\nexport async function listRepos(user: string): Promise<unknown> {\n  const res = await fetch(`https://api.github.com/users/${user}/repos`, {\n    headers: { Authorization: `token ${HARDCODED_TOKEN}` },\n  });\n  return res.json();\n}",
+      "find": "const TOKEN = import.meta.env.VITE_GITHUB_PAT ?? \"\";\n\nexport async function listRepos(user: string): Promise<unknown> {\n  const res = await fetch(`https://api.github.com/users/${user}/repos`, {\n    headers: { Authorization: `token ${TOKEN}` },\n  });\n  return res.json();\n}",
       "replace": "export async function listRepos(user: string): Promise<unknown> {\n  const res = await fetch(`/api/github?user=${encodeURIComponent(user)}`);\n  return res.json();\n}"
     }
   ]
