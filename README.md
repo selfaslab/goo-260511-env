@@ -9,6 +9,8 @@
 
 [빠른 시작](#-빠른-시작) · [주요 기능](#-주요-기능) · [작동 방식](#-어떻게-작동하나요) · [개인정보](#-개인정보-원칙) · [기여하기](#-기여하기)
 
+<img width="1497" height="1276" alt="env1" src="https://github.com/user-attachments/assets/db7ba885-3d78-4eb2-a838-e99d2e7bcfc5" />
+
 </div>
 
 ---
@@ -58,7 +60,7 @@ npm --prefix client run dev    # → http://localhost:5173  (대시보드 UI)
 > 의도적으로 6가지 위험을 심어둔 데모 프로젝트라 모든 기능이 한 번에 켜집니다.
 
 ---
-
+<img width="1479" height="1033" alt="env2" src="https://github.com/user-attachments/assets/45ca7b44-33fe-4798-bf26-89f0753ed5ce" />
 ## ✨ 주요 기능
 
 ### Phase 1 — 로컬 시크릿 스캐너
@@ -198,6 +200,7 @@ npm --prefix client run dev    # → http://localhost:5173  (대시보드 UI)
    텔레메트리도, LLM 호출도 없습니다 → 에어갭 환경에서도 로컬 스캔이 가능합니다.
 
 ---
+<img width="1504" height="1099" alt="env3" src="https://github.com/user-attachments/assets/26bb2b9a-05de-49f3-ab41-82da11133da0" />
 
 ## 📡 API
 
