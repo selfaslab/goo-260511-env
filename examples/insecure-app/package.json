@@ -1,0 +1,9 @@
+{
+  "name": "insecure-app-demo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Intentionally insecure example project. Use it as a target for `npm run dev` of .env Guardian.",
+  "scripts": {
+    "noop": "echo 'Do not run me. I exist only to be scanned.'"
+  }
+}

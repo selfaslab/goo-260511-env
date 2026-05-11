@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-05-11T01:00:00.000Z",
+  "projectPath": "examples/insecure-app",
+  "replace": [
+    {
+      "file": ".env",
+      "find": "VITE_OPENAI_API_KEY=",
+      "replace": "OPENAI_API_KEY="
+    },
+    {
+      "file": "src/hooks/useChat.ts",
+      "find": "const apiKey = import.meta.env.VITE_OPENAI_API_KEY;\n    const response = await fetch(\"https://api.openai.com/v1/chat/completions\", {\n      method: \"POST\",\n      headers: {\n        \"Content-Type\": \"application/json\",\n        Authorization: `Bearer ${apiKey}`,\n      },\n      body: JSON.stringify({\n        model: \"gpt-4o-mini\",\n        messages: [{ role: \"user\", content: question }],\n      }),\n    });",
+      "replace": "const response = await fetch(\"/api/chat\", {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({ question }),\n    });"
+    },
+    {
+      "file": "src/services/github.ts",
+      "find": "const HARDCODED_TOKEN = \"ghp_abcdEFGH1234567890abcdEFGH1234567890\";\n\nexport async function listRepos(user: string): Promise<unknown> {\n  const res = await fetch(`https://api.github.com/users/${user}/repos`, {\n    headers: { Authorization: `token ${HARDCODED_TOKEN}` },\n  });\n  return res.json();\n}",
+      "replace": "export async function listRepos(user: string): Promise<unknown> {\n  const res = await fetch(`/api/github?user=${encodeURIComponent(user)}`);\n  return res.json();\n}"
+    }
+  ]
+}
